@@ -1,0 +1,61 @@
+//Link for the problem :- https://leetcode.com/problems/spiral-matrix/
+
+//code ---> using simulation technique
+
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& arr) {
+        int m=arr.size();         // no. of rows
+        int n=arr[0].size();      // no. of columns
+        
+        vector<int> result;
+        
+        int count=0;
+        
+        int left=0,right=n,up=0,down=m;                        // setting up four corners
+        
+        while(count<m*n)
+        {
+            // iterate from left to right 
+            
+            for(int i=left;i<right&&up<down;i++)
+            {
+                result.push_back(arr.at(up).at(i)); count++;
+            }
+            //increment up
+            up++;
+            
+            
+            // iterate on last column
+            
+            for(int i=up;i<down&&right>left;i++)
+            {
+                result.push_back(arr.at(i).at(right-1)); count++;
+            }
+            // decrement right
+            right--;
+            
+            
+            //iterate in last row
+            
+            for(int i=right-1;i>=left&&down>up;i--)
+            {
+                result.push_back(arr.at(down-1).at(i)); count++;
+            }
+            // decrement down
+            down--;
+            
+            
+            //iterate on first column
+            
+            for(int i=down-1;i>=up&&left<right;i--)
+            {
+                result.push_back(arr.at(i).at(left)); count++;
+            }
+            // increment left
+            left++;
+        }
+        
+        return result;
+    }
+};
