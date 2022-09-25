@@ -1,0 +1,38 @@
+//Link for problem :- https://leetcode.com/problems/jump-game/
+
+// code --->
+
+class Solution {
+public:
+    bool check(vector<int>& possible,vector<int>& nums,int i=0)
+    {
+        int jump=nums[i];
+        
+        // base condition
+        if(i+jump>=nums.size()-1) return true;
+        if(possible[i+jump]!=-1) return false;
+        
+        while(jump)
+        {
+            cout << jump<<endl;
+            if(nums[i+jump]==0) 
+            {
+                possible[i+jump]=0;
+                --jump;
+                continue;
+            }
+            else if(check(possible,nums,i+jump))
+                return true;
+            else
+                possible[i+jump]=0;
+            
+            --jump;
+        }
+        return false;
+    }
+    bool canJump(vector<int>& nums) {
+        vector<int> possible(nums.size(),-1);
+        
+        return check(possible,nums);
+    }
+};
