@@ -1,0 +1,57 @@
+// Link for problem :- https://leetcode.com/problems/generate-parentheses/description/
+
+// code ---> 
+
+class Solution {
+public:
+    bool isValid(string s) 
+    {
+        vector<char> stack;
+        for(int i=0;i<s.length();i++)
+        {
+            if(stack.empty())
+            {
+                stack.push_back(s[i]);
+            }
+            else
+            {
+                if((stack.back()=='(' && s[i]==')')||(stack.back()=='{' && s[i]=='}') || (stack.back()=='[' && s[i]==']')) 
+                {
+                    stack.pop_back();
+                }
+                else if(s[i]=='('||s[i]=='{' || s[i]=='[') 
+                {
+                    stack.push_back(s[i]);   
+                }
+                else return false;
+            }
+        }
+        if(stack.size()==0) return true;
+        else return false;
+     
+    }
+    void solve(vector<string>& ans,string s,int& n,int obCount,int cbCount)
+    {
+        if(s.length()==2*n && isValid(s))
+        {
+            ans.push_back(s);
+            return;
+        }
+        
+        if(obCount<n)
+        {
+            solve(ans,s+"(",n,obCount+1,cbCount);
+        }
+        if(cbCount<n)
+        {
+            solve(ans,s+")",n,obCount,cbCount+1);
+        }
+    }
+    vector<string> generateParenthesis(int n) 
+    {
+        vector<string> ans;
+        string s="(";
+        solve(ans,s,n,1,0);
+        return ans;
+    }
+};
