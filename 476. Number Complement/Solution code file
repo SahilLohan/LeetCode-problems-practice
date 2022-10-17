@@ -1,0 +1,10 @@
+// Link for problem :- https://leetcode.com/problems/number-complement/description/
+
+// code --->
+
+class Solution {
+public:
+    int findComplement(int n) {
+        return n>0? (int)((1ll<<((int)log2(n)+1))-1)^n : 1;
+    }
+};
