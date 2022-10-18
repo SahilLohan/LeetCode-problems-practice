@@ -1,0 +1,233 @@
+// Link for problem :- https://leetcode.com/problems/pacific-atlantic-water-flow/
+
+
+// code --->
+
+
+class Solution {
+public:
+    bool** pci=nullptr;
+    bool** atl=nullptr;
+    
+    int m=0,n=0;
+    
+    bool p_check(int i,int j,vector<vector<int>>& ht)
+    {
+        if(i==0 || j==0 || pci[i][j]==true)
+        {
+            return true;
+        }
+        
+        int k;
+        // up possibilty
+        if(ht.at(i-1).at(j) <= ht.at(i).at(j))
+        {
+            k=ht.at(i).at(j);
+            ht.at(i).at(j)=100010;
+            if(p_check(i-1,j,ht))
+            {
+                ht.at(i).at(j)=k;
+                return true;
+            }
+            ht.at(i).at(j)=k;
+        }
+        
+        // left possibilty
+        if(ht.at(i).at(j-1) <= ht.at(i).at(j))
+        {
+            k=ht.at(i).at(j);
+            ht.at(i).at(j)=100010;
+            if(p_check(i,j-1,ht))
+            {
+                ht.at(i).at(j)=k;
+                return true;
+            }
+            ht.at(i).at(j)=k;
+        }
+        
+        // right possibilty
+        if(j!=n-1)
+        {
+            if(ht.at(i).at(j+1) <= ht.at(i).at(j))
+        {
+            k=ht.at(i).at(j);
+            ht.at(i).at(j)=100010;
+            if(p_check(i,j+1,ht))
+            {
+                ht.at(i).at(j)=k;
+                return true;
+            }
+            ht.at(i).at(j)=k;
+        }
+        }
+        
+        
+        // down possibilty
+        if(i!=m-1)
+        {
+            if(ht.at(i+1).at(j) <= ht.at(i).at(j))
+        {
+            k=ht.at(i).at(j);
+            ht.at(i).at(j)=100010;
+            if(p_check(i+1,j,ht))
+            {
+                ht.at(i).at(j)=k;
+                return true;
+            }
+            ht.at(i).at(j)=k;
+        }
+        }
+        
+        return false;
+    }
+    
+    bool a_check(int i,int j,vector<vector<int>>& ht)
+    {
+        if(i==m-1|| j==n-1 || atl[i][j]==true)
+        {
+            return true;
+        }
+        
+        int k;
+        // down possibilty
+        if(ht.at(i+1).at(j) <= ht.at(i).at(j))
+        {
+            k=ht.at(i).at(j);
+            ht.at(i).at(j)=100010;
+            if(a_check(i+1,j,ht))
+            {
+                ht.at(i).at(j)=k;
+                return true;
+            }
+            ht.at(i).at(j)=k;
+        }
+        
+        // right possibilty
+        if(ht.at(i).at(j+1) <= ht.at(i).at(j))
+        {
+            k=ht.at(i).at(j);
+            ht.at(i).at(j)=100010;
+            if(a_check(i,j+1,ht))
+            {
+                ht.at(i).at(j)=k;
+                return true;
+            }
+            ht.at(i).at(j)=k;
+        }
+        
+        // up possibilty
+        if(i!=0)
+        {
+            if( ht.at(i-1).at(j) <= ht.at(i).at(j) )
+        {
+            k=ht.at(i).at(j);
+            ht.at(i).at(j)=100010;
+            if(a_check(i-1,j,ht))
+            {
+                ht.at(i).at(j)=k;
+                return true;
+            }
+            ht.at(i).at(j)=k;
+        }
+        }
+        
+        
+        // left possibilty
+        if(j!=0)
+        {
+            if(ht.at(i).at(j-1) <= ht.at(i).at(j))
+        {
+            k=ht.at(i).at(j);
+            ht.at(i).at(j)=100010;
+            if(a_check(i,j-1,ht))
+            {
+                ht.at(i).at(j)=k;
+                return true;
+            }
+            ht.at(i).at(j)=k;
+        }
+        }
+        
+        
+        return false;
+    }
+    
+    
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        m=heights.size();
+        n=heights.at(0).size();
+        
+        pci=new bool*[m];
+        atl=new bool*[m];
+        
+        for(int i=0;i<m;i++)
+        {
+            pci[i]=new bool[n];
+            atl[i]=new bool[n];
+        }
+        
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                pci[i][j]=false;
+                atl[i][j]=false;
+            }
+        }
+        
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(p_check(i,j,heights))
+                {
+                    pci[i][j]=true;
+                    cout << "pci["<<i<<"]["<<j<<"]= "<< pci[i][j] << endl;
+                }
+                else
+                {
+                    pci[i][j]=false;
+                    cout << "pci["<<i<<"]["<<j<<"]= "<< pci[i][j] << endl;
+                }
+            }
+        }
+        
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(a_check(i,j,heights))
+                {
+                    atl[i][j]=true;
+                    cout << "atl["<<i<<"]["<<j<<"]= "<< atl[i][j] << endl;
+                }
+                else
+                {
+                    atl[i][j]=false;
+                    cout << "atl["<<i<<"]["<<j<<"]= "<< atl[i][j] << endl;
+                }
+            }
+        }
+        
+        
+        vector<vector<int>> result;
+        vector<int> temp;
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(pci[i][j]==true && atl[i][j]==true)
+                {
+                    temp.push_back(i);
+                    temp.push_back(j);
+                    result.push_back(temp);
+                    temp.clear();
+                }
+            }
+        }
+        
+        return result;
+        
+    }
+};
+
