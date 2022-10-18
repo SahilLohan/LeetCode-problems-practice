@@ -1,0 +1,43 @@
+// Link for problem :- https://leetcode.com/problems/count-and-say/description/
+
+
+// code --->
+
+
+class Solution {
+public:
+    string solve(int n,string ans="1")
+    {
+        if(n==1) return "1";
+        ans=solve(n-1);
+
+        string temp;
+        char num;
+        int count=0;
+        // lets count numbers in string ans;
+        for(int i=0;i<ans.length();i++)
+        {
+            num=ans[i];
+            while(ans[i]==num)
+            {
+                count++;
+                i++;
+
+                if(i>ans.length())
+                break;
+
+            }
+            temp.push_back(count+48);
+            temp.push_back(num);
+            count=0;
+            i--;
+        }
+        // return temp;
+
+        return temp;
+
+    }
+    string countAndSay(int n) {
+      return solve(n);
+    }
+};
