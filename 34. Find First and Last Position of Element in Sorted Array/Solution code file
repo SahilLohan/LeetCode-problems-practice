@@ -1,0 +1,65 @@
+// link :- https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/
+
+
+// code --->
+
+
+class Solution {
+public:
+    void solve(vector<int>& nums, int target,vector<int>& result,int l,int h)
+    {
+        if(l>h)
+        {
+            // nhi mila
+            result.push_back(-1);
+            result.push_back(-1);
+            return;
+        }
+
+
+        int mid=(l+h)/2;
+        if(nums[mid]==target)
+        {
+            // mil gya
+            int first_index=mid;
+            int last_index=mid;
+            if(mid!=0)
+            {
+                while(target==nums[first_index-1])
+                {
+                    first_index--;
+                    if(first_index==0)
+                    break;
+                }
+            }
+            result.push_back(first_index);
+            if(mid!=nums.size()-1)
+            {
+                while(target==nums[last_index+1])
+                {
+                    last_index++;
+                    if(last_index==nums.size()-1)
+                    break;
+                }
+            }
+            result.push_back(last_index);
+            return;
+        }
+        else
+        {
+            if(target > nums[mid])
+            {
+                solve(nums,target,result,mid+1,h);
+            }
+            else{
+                solve(nums,target,result,l,mid-1);
+            }
+        }
+    }
+
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int> result;
+        solve(nums,target,result,0,nums.size()-1);    
+        return result;
+    }
+};
