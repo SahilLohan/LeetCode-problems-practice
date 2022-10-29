@@ -1,0 +1,44 @@
+// Link :- https://leetcode.com/problems/length-of-last-word/description/
+
+
+// code --->
+
+
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        // n=len(s)
+        // while s[n-1]==" ":
+        //     n=n-1
+
+        // count=0
+        // while s[n-1]!=" ":
+        //     if n==0:
+        //         break
+        //     count= count+1
+        //     n=n-1
+            
+
+        // return count
+        int length=s.length();
+
+        while(s[length-1]==' ')
+        {
+            //length=length-1;
+            length--;
+        }
+
+        int count=0;
+        while(s[length-1]!=' ')
+        {
+            
+            count++;
+            length--;
+            if(length==0)
+            {
+                break;
+            }
+        }
+        return count;
+    }
+};
