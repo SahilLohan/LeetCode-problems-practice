@@ -1,6 +1,6 @@
-Link for problem :- https://leetcode.com/problems/subarray-sums-divisible-by-k/
+//Link for problem :- https://leetcode.com/problems/subarray-sums-divisible-by-k/
 
-code --->
+//code --->
 class Solution {
 public:
     int subarraysDivByK(vector<int>& arr, int k) {
