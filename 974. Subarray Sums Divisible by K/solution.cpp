@@ -30,7 +30,9 @@ public:
         //         }
         //     }
         // }
+        
         // if they have same remainder.. then it will be counted
+        
         
         map<int,int> m;
         int rem;
