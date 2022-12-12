@@ -1,8 +1,6 @@
 // Link for problem :- https://leetcode.com/problems/power-of-three/description/
 
-
-// code --->
-
+// Solution --->
 
 class Solution {
 public:
