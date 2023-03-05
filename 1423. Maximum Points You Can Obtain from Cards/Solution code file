@@ -1,7 +1,7 @@
-Link for Problem :- https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/
+//Link for Problem :- https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/
 
 
-code --->
+//code --->
 
 class Solution {
 public:
