@@ -23,7 +23,6 @@ public:
                 count+=mp[sum-k];
             }
             ++mp[sum];
-            
         }
         return count;
     }
