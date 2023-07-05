@@ -2,6 +2,63 @@
 
 // code --->
 
+// current solution
+
+class Solution {
+    unordered_map<char,string> mp;
+    string digits="";
+    vector<string> ans;
+    
+public:
+    Solution()
+    {
+        mp['1']="";
+        mp['2']="abc";
+        mp['3']="def";
+        mp['4']="ghi";
+        mp['5']="jkl";
+        mp['6']="mno";
+        mp['7']="pqrs";
+        mp['8']="tuv";
+        mp['9']="wxyz";
+    }
+
+    void solve(int index,string pattern)
+    {
+        if(index==digits.length())
+        {
+            ans.push_back(pattern);
+            return;
+        }
+        else
+        {
+            string alphabets = mp[digits[index]];
+            for(auto alphabet:alphabets)
+            {
+                solve(index+1,pattern+alphabet);
+            }
+        }
+    }
+
+    vector<string> letterCombinations(string digits) {
+        if(digits.length()==0)
+        return ans;
+        
+        this->digits = digits;
+        int index=0;
+        string pattern="";
+        solve(index,pattern);
+        return ans;
+    }
+};
+
+
+
+
+
+
+
+// old solution
 class Solution {
 private:
     string two="abc";
