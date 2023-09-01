@@ -28,6 +28,7 @@ public:
         index--;
         TreeNode* ans = new TreeNode(element);
 
+        
         ans->right = solve(inorder,postorder,mp,index,strt,pos+1);
         ans->left = solve(inorder,postorder,mp,index,pos-1,end);
         
