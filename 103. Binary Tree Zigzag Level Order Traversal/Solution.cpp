@@ -36,8 +36,6 @@ public:
                 root = q.front();
                 q.pop();
                 temp.push_back(root->val);
-
-                
                 if(root->left) q.push(root->left);
                 if(root->right) q.push(root->right);
             }
