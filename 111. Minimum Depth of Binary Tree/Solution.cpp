@@ -13,6 +13,8 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+
 class Solution {
 public:
     int ans=INT_MAX;
@@ -33,7 +35,6 @@ public:
             if(root->right) solve(root->right,height+1);
         }
     }
-
     int minDepth(TreeNode* root) {
         if(!root) return 0;
         else
